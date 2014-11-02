@@ -1,0 +1,10 @@
+{
+  "name": "coordinates-picker",
+  "version": "1.0.0",
+  "devDependencies": {
+    "karma": "^0.12.24",
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-jasmine": "^0.2.0",
+    "karma-jasmine-jquery": "^0.1.1"
+  }
+}
