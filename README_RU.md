@@ -4,7 +4,7 @@ coordinates-picker
 Данный модуль позволяет отобразить на карте (Google Maps) местоположение введённого адреса, а так же сохранить координаты найденного места в отдельное поле в произвольном формате.
 
 Параметры
--------------
+---------
 
 <table>
     <tr>
@@ -61,6 +61,7 @@ coordinates-picker
 
 Методы
 -------
+
 <table>
     <tr>
         <th>Метод</th>
@@ -91,6 +92,7 @@ coordinates-picker
 
 События
 -------
+
 <table>
     <tr>
         <th>Событие</th>
@@ -116,6 +118,7 @@ coordinates-picker
 
 Свойства событий
 ----------------
+
 <table>
     <tr>
         <th>Свойство</th>
@@ -175,6 +178,23 @@ coordinates-picker
 
 Примеры подключения
 --------------------
+
+Модуль можно загрузить одним из трёх способов:
+
+* скопировать код из репозитория в свой проект
+* получить код из CDN:
+
+```html
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/coordinates-picker/1.0.0/coordinates-picker.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/coordinates-picker/1.0.0/coordinates-picker.min.js"></script>
+<!-- страница проекта на cdnjs.com: https://cdnjs.com/libraries/coordinates-picker -->
+```
+* установить модуль через Bower:
+
+```bash
+bower install coordinates-picker
+```
+
 Для наглядности в примерах будет использоваться следующая структура проекта:
 
     ├── assets
@@ -188,7 +208,6 @@ coordinates-picker
     │       ├── CoordinatesPicker.js
     │       └── main.js
     └── index.php
-
 
 Модуль имеет зависимости от jQuery и Google Maps, так же модуль поддерживает AMD загрузку. Поэтому подключение модуля может осуществляться одним из двух способов:
 
@@ -216,16 +235,16 @@ coordinates-picker
 
 ```javascript
 require.config({
-	paths: {
-		async: 'requirejs.async',
-		coordinatespicker: '../CoordinatesPicker',
-		jquery: '//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min',
-		googlemaps: 'https://maps.google.com/maps/api/js?sensor=false&amp;language=ru'
-	}
+    paths: {
+        async: 'requirejs.async',
+        coordinatespicker: '../CoordinatesPicker',
+        jquery: '//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min',
+        googlemaps: 'https://maps.google.com/maps/api/js?sensor=false&amp;language=ru'
+    }
 });
 
 define('googlemaps', ['async!googlemaps'], function() {
-	return window.google;
+    return window.google;
 });
 ```
 
@@ -233,7 +252,7 @@ define('googlemaps', ['async!googlemaps'], function() {
 
 ```javascript
 require(['jquery', 'googlemaps', 'coordinatespicker'], function($, google, coordinatesPicker) {
-  // см. "Пример использования"
+    // см. "Пример использования"
 });
 ```
 
@@ -244,22 +263,22 @@ require(['jquery', 'googlemaps', 'coordinatespicker'], function($, google, coord
 
 ```html
 <form id="institution-form">
-	<select id="country" name="country" class="address-part">
-		<option value="">Страна</option>
-		<option value="1">Россия</option>
-		<option value="2">США</option>
-		<option value="3">Польша</option>
-		<option value="4">Казахстан</option>
-		<option value="5">Монголия</option>
-	</select>
-	<input type="text" id="city" name="city" class="address-part" placeholder="Город"/>
-	<input type="text" id="street" name="street" class="address-part" placeholder="Улица"/>
-	<input type="text" id="house" name="house" class="address-part" placeholder="Дом"/>
-	<input type="text" id="coordinates" name="coordinates" readonly/>
+    <select id="country" name="country" class="address-part">
+        <option value="">Страна</option>
+        <option value="1">Россия</option>
+        <option value="2">США</option>
+        <option value="3">Польша</option>
+        <option value="4">Казахстан</option>
+        <option value="5">Монголия</option>
+    </select>
+    <input type="text" id="city" name="city" class="address-part" placeholder="Город"/>
+    <input type="text" id="street" name="street" class="address-part" placeholder="Улица"/>
+    <input type="text" id="house" name="house" class="address-part" placeholder="Дом"/>
+    <input type="text" id="coordinates" name="coordinates" readonly/>
 </form>
 
 <div>
-	<div style="width: 500px; height: 500px;"></div>
+    <div style="width: 500px; height: 500px;"></div>
 </div>
 ```
 
@@ -269,17 +288,30 @@ require(['jquery', 'googlemaps', 'coordinatespicker'], function($, google, coord
 // При AMD загрузке вместо BarinBritva.CoordinatesPicker необходимо использовать имя, 
 // данное при объявлении зависимости, в даннном примере - coordinatesPicker
 var coordinatesPicker = new BarinBritva.CoordinatesPicker({
-  fields: $('.address-part'),
-  container: $('#map'),
-  coordinates: $('#coordinates'),
-  format: 'lng,lat',
-  center: new google.maps.LatLng(53.517, 49.417),
-  zooms: {initial: 9, country: 11, locality: 14, route: 16, street_address: 18},
-  marker: {draggable: true, animation: null, icon: '/assets/images/marker.png'},
-  map: {disableDefaultUI: false}
+    fields: $('.address-part'),
+    container: $('#map'),
+    coordinates: $('#coordinates'),
+    format: 'lng,lat',
+    center: new google.maps.LatLng(53.517, 49.417),
+    zooms: {
+        initial: 9,
+        country: 11,
+        locality: 14,
+        route: 16,
+        street_address: 18
+    },
+    marker: {
+        draggable: true,
+        animation: null,
+        icon: '/assets/images/marker.png'
+    },
+    map: {
+        disableDefaultUI: false
+    }
 });
 ```
 
 Демо
 ----
+
 Демо модуля можно посмотреть <a href="http://coordinatespicker.demo.barinbritva.ru" target="_blank">здесь</a>.

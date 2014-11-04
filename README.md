@@ -47,19 +47,24 @@ prepare field for storing in the database like POINT object: <code>PointFromText
         <td>zooms</td>
         <td>object</td>
         <td>Levels of scale. 
-<ul>
-<li><code>initial</code> (initial),</li>
-<li><code>country</code> (country precision),</li>
-<li><code>locality</code> (city precision)</li>
-<li><code>route</code> (street precision),</li>
-<li><code>street_address</code> (appartment precision).</li>
-</ul>
-</td>
+            <ul>
+                <li><code>initial</code> (initial),</li>
+                <li><code>country</code> (country precision),</li>
+                <li><code>locality</code> (city precision),</li>
+                <li><code>route</code> (street precision),</li>
+                <li><code>street_address</code> (appartment precision).</li>
+            </ul>
+        </td>
     </tr>
     <tr>
         <td>marker</td>
         <td>object</td>
-        <td>Object of <a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions" target=“_blank">marker parameters</a>. (Google Maps API).</td>
+        <td>Object of <a href="https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions" target=“_blank">marker parameters</a> (Google Maps API).</td>
+    </tr>
+    <tr>
+        <td>map</td>
+        <td>object</td>
+        <td>Object of <a href="https://developers.google.com/maps/documentation/javascript/reference#MapOptions" target="_blank">map parameters</a> (Google Maps API).</td>
     </tr>
 </table>
 
@@ -96,6 +101,7 @@ Methods
 
 Events
 ------
+
 <table>
     <tr>
         <th>Event</th>
@@ -180,7 +186,23 @@ Event properties
 </table>
 
 Loading examples
---------------------
+----------------
+
+You can get module code via three ways:
+
+* copy code from repository to your project
+* get code from CDN:
+
+```html
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/coordinates-picker/1.0.0/coordinates-picker.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/coordinates-picker/1.0.0/coordinates-picker.min.js"></script>
+<!-- project page on cdnjs.com: https://cdnjs.com/libraries/coordinates-picker -->
+```
+* install module via Bower:
+
+```bash
+bower install coordinates-picker
+```
 
 Project structure:
 
@@ -223,16 +245,16 @@ File <code>/assets/scripts/amd/require.config.js</code>
 
 ```javascript
 require.config({
-	paths: {
-		async: 'requirejs.async',
-		coordinatespicker: '../CoordinatesPicker',
-		jquery: '//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min',
-		googlemaps: 'https://maps.google.com/maps/api/js?sensor=false&amp;language=ru'
-	}
+    paths: {
+        async: 'requirejs.async',
+        coordinatespicker: '../CoordinatesPicker',
+        jquery: '//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min',
+        googlemaps: 'https://maps.google.com/maps/api/js?sensor=false&amp;language=ru'
+    }
 });
 
 define('googlemaps', ['async!googlemaps'], function() {
-	return window.google;
+    return window.google;
 });
 ```
 
@@ -240,33 +262,33 @@ Part of <code>/assets/scripts/amd/main.js</code> file
 
 ```javascript
 require(['jquery', 'googlemaps', 'coordinatespicker'], function($, google, coordinatesPicker) {
-  // look "Usage example"
+    // look "Usage example"
 });
 ```
 
 Usage example
---------------------
+-------------
 
 Part of <code>index.html</code> file
 
 ```html
 <form id="institution-form">
-	<select id="country" name="country" class="address-part">
-		<option value="">Country</option>
-		<option value="1">Russia</option>
-		<option value="2">USA</option>
-		<option value="3">Poland</option>
-		<option value="4">Kazakhstan</option>
-		<option value="5">Mongolia</option>
-	</select>
-	<input type="text" id="city" name="city" class="address-part" placeholder="City"/>
-	<input type="text" id="street" name="street" class="address-part" placeholder="Street"/>
-	<input type="text" id="house" name="house" class="address-part" placeholder="Apartment"/>
-	<input type="text" id="coordinates" name="coordinates" readonly/>
+    <select id="country" name="country" class="address-part">
+        <option value="">Country</option>
+        <option value="1">Russia</option>
+        <option value="2">USA</option>
+        <option value="3">Poland</option>
+        <option value="4">Kazakhstan</option>
+        <option value="5">Mongolia</option>
+    </select>
+    <input type="text" id="city" name="city" class="address-part" placeholder="City"/>
+    <input type="text" id="street" name="street" class="address-part" placeholder="Street"/>
+    <input type="text" id="house" name="house" class="address-part" placeholder="Apartment"/>
+    <input type="text" id="coordinates" name="coordinates" readonly/>
 </form>
 
 <div>
-	<div style="width: 500px; height: 500px;"></div>
+    <div style="width: 500px; height: 500px;"></div>
 </div>
 ```
 
@@ -276,17 +298,30 @@ Using module in <code>/assets/scripts/main.js</code> or <code>/assets/scripts/am
 // If you are using AMD, you must replace BarinBritva.CoordinatesPicker with name 
 // given in dependency. In this example it is coordinatesPicker.
 var coordinatesPicker = new BarinBritva.CoordinatesPicker({
-  fields: $('.address-part'),
-  container: $('#map'),
-  coordinates: $('#coordinates'),
-  format: 'lng,lat',
-  center: new google.maps.LatLng(53.517, 49.417),
-  zooms: {initial: 9, country: 11, locality: 14, route: 16, street_address: 18},
-  marker: {draggable: true, animation: null, icon: '/assets/images/marker.png'},
-  map: {disableDefaultUI: false}
+    fields: $('.address-part'),
+    container: $('#map'),
+    coordinates: $('#coordinates'),
+    format: 'lng,lat',
+    center: new google.maps.LatLng(53.517, 49.417),
+    zooms: {
+        initial: 9,
+        country: 11,
+        locality: 14,
+        route: 16,
+        street_address: 18
+    },
+    marker: {
+        draggable: true,
+        animation: null,
+        icon: '/assets/images/marker.png'
+    },
+    map: {
+        disableDefaultUI: false
+    }
 });
 ```
 
 Demo
 ----
+
 You can see demo example <a href="http://coordinatespicker.demo.barinbritva.ru" target=“_blank">in here</a>.

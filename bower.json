@@ -25,6 +25,7 @@
 		}
 	],
 	"homepage": "https://github.com/barinbritva/coordinates-picker",
+	"license": "https://github.com/barinbritva/coordinates-picker/blob/master/LICENSE",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/barinbritva/coordinates-picker.git"
