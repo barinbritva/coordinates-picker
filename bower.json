@@ -7,7 +7,7 @@
 		"pick",
 		"coordinates"
 	],
-	"main": "CoordinatesPicker.js",
+	"main": "CoordinatesPicker.min.js",
 	"ignore": [
 		".gitignore",
 		"karma.conf.js",
